@@ -7,11 +7,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 
 const Layout = () => {
     //
     const navigate = useNavigate();
-    const navItems = ['Home', 'About', 'Profile'];
+    const navItems = ['Home', 'About us', 'Register', 'Contents', 'Profile', 'Login'];
     
     const movePage = (item) => {
         const selectedMenu = item.target.value;
@@ -19,11 +20,17 @@ const Layout = () => {
             case 'Home':
                 navigate('/');
                 break;
-            case 'About':
-                navigate('/about');
+            case 'About us':
+                navigate('/about?detail=true&mode=1');
                 break;
             case 'Profile':
-                navigate('/profiles/giorgio');
+                navigate('/user/profiles/giorgio');
+                break;
+            case 'Register':
+                navigate('/user/register');
+                break;
+            case 'Login':
+                navigate('/user/login');
                 break;
             default:
                 console.log(`Sorry, we are out of Page.`);
@@ -31,7 +38,7 @@ const Layout = () => {
     }
 
     return (
-        <div>
+        <Box sx={{display: 'flex'}}>
             <AppBar component="nav">
                 <Toolbar>
                 <IconButton
@@ -58,10 +65,12 @@ const Layout = () => {
                 </Box>
                 </Toolbar>
             </AppBar>
-            <main>
-                <Outlet />
-            </main>
-        </div>
+            <Container fixed>
+                <Box sx={{width:'100%', pt:'84px'}}>
+                    <Outlet />
+                </Box>
+            </Container>
+        </Box>
     )
 };
 

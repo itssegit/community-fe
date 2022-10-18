@@ -5,6 +5,7 @@
  */
 
  import { useSearchParams } from 'react-router-dom';
+ import { Stack, Button } from '@mui/material';
 
  const About = () => {
    const [searchParams, setSearchParams] = useSearchParams();
@@ -22,12 +23,15 @@
  
    return (
      <div>
-       <h1>소개</h1>
-       <p>리액트 라우터를 사용해 보는 프로젝트입니다.</p>
+       <h1>일단 블로그를 만들어보려고 합니다.</h1>
+       <h3>이 페이지는 또한 React Router Dom 쿼리 스트링 예시 페이지이기도 합니다.</h3>
+       <p>Tech set : React, Spring boot, Docker, AWS etc</p>
        <p>detail: {detail}</p>
        <p>mode: {mode}</p>
-       <button onClick={onToggleDetail}>Toggle detail</button>
-       <button onClick={onIncreaseMode}>mode + 1</button>
+       <Stack direction="row" spacing={1}>
+          <Button variant="contained" onClick={onToggleDetail}>Toggle detail</Button>
+          <Button variant="contained" color="info" onClick={onIncreaseMode}>mode + 1</Button>
+       </Stack>
      </div>
    );
  };
