@@ -20,6 +20,18 @@ const dummyData = {
         description: '힝힝',
         email: 'incheol@naver.com',
         nickname: 'plmmaster'
+    },
+    yl: {
+        name: 'yl',
+        description: '힝힝',
+        email: 'incheol@naver.com',
+        nickname: 'plmmaster'
+    },
+    local: {
+        name: 'local',
+        description: '힝힝',
+        email: 'incheol@naver.com',
+        nickname: 'plmmaster'
     }
 }
 
