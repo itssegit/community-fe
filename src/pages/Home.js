@@ -79,7 +79,7 @@ const itemData = [
 const Home = () => {
     return (
         <div>
-            <h1>Uploaded Articles</h1>
+            <h1>Uploaded articles</h1>
             <Box component='main'>
                 <Grid container spacing={2}>
                     {
