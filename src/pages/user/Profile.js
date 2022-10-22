@@ -8,38 +8,12 @@ import ListSubheader from '@mui/material/ListSubheader';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import FakeDBUser from '../../fakedb/user';
 
 /**
  * 
  * URL 파라미터 사용법 예시
  */
-
-const dummyData = {
-    giorgio: {
-        name: '죠르죠',
-        description: '으아아아아아 하기 싫어!',
-        email: 'giorgio0420@naver.com',
-        nickname: 'giorgio'
-    },
-    ironman: {
-        name: '초리초리',
-        description: '힝힝',
-        email: 'incheol@naver.com',
-        nickname: 'plmmaster'
-    },
-    yl: {
-        name: 'yl',
-        description: '힝힝',
-        email: 'incheol@naver.com',
-        nickname: 'plmmaster'
-    },
-    local: {
-        name: 'local',
-        description: '힝힝',
-        email: 'incheol@naver.com',
-        nickname: 'plmmaster'
-    }
-}
 
 const itemData = [
     {
@@ -118,7 +92,8 @@ const itemData = [
 
 const Profile = () => {
     const params = useParams();
-    const profile = dummyData[params.username];
+    const FakeDBUserObj = FakeDBUser();
+    const profile = FakeDBUserObj.getUserById(params.username);
 
     return (
         <div>
