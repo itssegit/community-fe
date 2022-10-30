@@ -1,5 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Home from './pages/Home';
 import About from './pages/etc/About';
 import Profile from './pages/user/Profile';
@@ -9,6 +10,7 @@ import Layout from './Layout';
 import Register from './pages/user/Register';
 import Login from './pages/user/Login';
 import AuthRoute from './pages/auth/AuthRoute';
+import { useEffect } from 'react';
 
 /**
  * <Route path='/user/profiles/:username' element={<Profile />}/>
@@ -18,6 +20,11 @@ import AuthRoute from './pages/auth/AuthRoute';
 function App() {
   //
   const userRole = 'admin';
+  const user = useSelector(state => state.user);
+
+  useEffect(()=>{
+    console.log(user);
+  }, [user]);
 
   return (
     <Routes>
@@ -27,15 +34,15 @@ function App() {
         <Route path='/articles' element={<Articles />}>
           <Route path=':id' element={<Article />} />
         </Route>
-        <Route 
-          path='/user/profiles/:username'
-          element={
-            <AuthRoute       
-              component={<Profile/>}
-              role={userRole}
-            />
-          }
-        />
+          <Route 
+            path='/user/profiles/:username'
+            element={
+              <AuthRoute       
+                component={<Profile/>}
+                role={userRole}
+              />
+            }
+          />
         <Route path='/user/register' element={<Register />} />
         <Route path='/user/login' element={<Login />} />
       </Route>

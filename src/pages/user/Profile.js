@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography } from "@mui/material";
+import { Typography, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import FakeDBUser from '../../fakedb/user';
+import AxiosModule from "../../services/itsse.axios";
 
 /**
  * 
@@ -94,6 +95,15 @@ const Profile = () => {
     const params = useParams();
     const FakeDBUserObj = FakeDBUser();
     const profile = FakeDBUserObj.getUserById(params.username);
+    const axiosModule = AxiosModule();
+
+    const changeProfile = () => {
+      const articleContents = {
+        title: 'test title',
+        contents: 'test contents'
+      }
+      axiosModule.sendPost('http://localhost:8080/api/article/register', articleContents);
+    }
 
     return (
         <div>
@@ -107,6 +117,7 @@ const Profile = () => {
                             <Typography>
                                 {profile.description}
                             </Typography>
+                            <Button variant="contained" onClick={changeProfile}>Profile 수정</Button>
                         </div>
                         <div style={{marginTop:'3rem'}}>
                             <div>

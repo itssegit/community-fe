@@ -33,13 +33,12 @@ export const deleteArticle = createAction(DELETE, articleNo => articleNo);
 
 const ArticleReducer = handleActions(
     {
-        [CREATE] : (state, {payload: article}) => {
+        [CREATE] : (state, {payload: article}) => 
             produce(state, draft => {
                 const createObj = {...articleItem};
                 createObj.title = article.title;
                 draft.articles.push(createObj);
-            });
-        }
+            })
     },
     initialState
 );

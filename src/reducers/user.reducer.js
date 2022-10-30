@@ -8,7 +8,7 @@ const initialState = {
 const LOGIN = 'user/LOGIN';
 const LOGOUT = 'user/LOGOUT';
 
-/**
+/**''
  * 1. 각 component에서는 아래의 action을 호출하게 된다.
  * 
  */
@@ -21,16 +21,15 @@ export const logout = createAction(LOGOUT);
  */
 const UserReducer = handleActions(
     {
-        [LOGIN] : (state, action) => {
+        [LOGIN] : (state, action) => 
             produce(state, draft => {
                 draft.isLogined = true;
-            })
-        },
-        [LOGOUT] : (state, action) => {
+            }),
+        
+        [LOGOUT] : (state, action) => 
             produce(state, draft => {
                 draft.isLogined = false;
             })
-        }
     },
     initialState
 );

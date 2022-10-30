@@ -13,6 +13,15 @@ const Layout = () => {
     //
     const navigate = useNavigate();
     const navItems = ['Home', 'About us', 'Register', 'Contents', 'Profile', 'Login'];
+
+    const checkLogin = () => {
+        const loginToken = window.localStorage.getItem('token');
+        console.log('loginToken', loginToken)
+        if(loginToken) {
+          return true;
+        }
+        return false;
+    }
     
     const movePage = (item) => {
         const selectedMenu = item.target.value;
@@ -58,9 +67,9 @@ const Layout = () => {
                 </Typography>
                 <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                     {navItems.map((item) => (
-                    <Button key={item} sx={{ color: '#fff' }} value={item} onClick={movePage}>
-                        {item}
-                    </Button>
+                        <Button key={item} sx={{ color: '#fff' }} value={item} onClick={movePage}>
+                            {item}
+                        </Button>
                     ))}
                 </Box>
                 </Toolbar>
