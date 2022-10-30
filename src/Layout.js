@@ -12,7 +12,7 @@ import Container from '@mui/material/Container';
 const Layout = () => {
     //
     const navigate = useNavigate();
-    const navItems = ['Home', 'About us', 'Register', 'Contents', 'Profile', 'Login'];
+    const navItems = ['Home', 'About us', 'Contents', 'Profile', 'Login'];
 
     const checkLogin = () => {
         const loginToken = window.localStorage.getItem('token');
@@ -31,6 +31,9 @@ const Layout = () => {
                 break;
             case 'About us':
                 navigate('/about?detail=true&mode=1');
+                break;
+            case 'Contents':
+                navigate('/article/register');
                 break;
             case 'Profile':
                 navigate('/user/profiles/giorgio');

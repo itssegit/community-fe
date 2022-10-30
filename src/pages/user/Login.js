@@ -27,6 +27,10 @@ const Login = () => {
         window.localStorage.setItem('token', token);
         dispatch(login());
     }
+
+    const goToUserRegister = () => {
+        window.location.href = '/user/register';
+    }
     //
     return (
         <div style={{marginTop:'4rem'}}>
@@ -58,7 +62,7 @@ const Login = () => {
                 <div style={{width:'500px', marginTop:'1.5rem'}}>
                     <Stack direction="row" spacing={1}>
                         <Button variant="contained" onClick={signin}>로그인</Button>
-                        <Button variant="contained" color="success">회원가입</Button>
+                        <Button variant="contained" color="success" onClick={goToUserRegister}>회원가입</Button>
                         <Button variant="contained" color="error">비밀번호 분실</Button>
                     </Stack>
                 </div>

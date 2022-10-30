@@ -10,6 +10,7 @@ import Layout from './Layout';
 import Register from './pages/user/Register';
 import Login from './pages/user/Login';
 import AuthRoute from './pages/auth/AuthRoute';
+import ArticleRegister from './pages/article/Register';
 import { useEffect } from 'react';
 
 /**
@@ -31,6 +32,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path='/' element={<Home />}/>
         <Route path='/about' element={<About />}/>
+        <Route path='/article/register' element={<ArticleRegister />} />
         <Route path='/articles' element={<Articles />}>
           <Route path=':id' element={<Article />} />
         </Route>
