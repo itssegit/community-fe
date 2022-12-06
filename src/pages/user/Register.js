@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import useInput from "../../hooks/useInput";
 import { useCallback, useState } from "react";
-import AxiosModule from "../../services/itsse.axios";
+import ConnectModule from "../../services/itsse.axios";
 
 const Register = () => {
   //
@@ -20,7 +20,6 @@ const Register = () => {
 
   const [passwordCheck, setPasswordCheck] = useState("");
   const [passwordError, setPasswordError] = useState(false);
-  const am = AxiosModule();
 
   const onChangePasswordCheck = useCallback(
     (e) => {
@@ -41,7 +40,7 @@ const Register = () => {
       role,
     };
     console.log(registerTargetData);
-    am.sendPost("http://localhost:8080/sign-api/sign-up", registerTargetData);
+    ConnectModule.sendPost("/sign-api/sign-up", registerTargetData);
   }, [id, nickname, password, name, role]);
   //
   return (

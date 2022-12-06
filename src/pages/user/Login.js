@@ -3,13 +3,14 @@ import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
 import { login } from "../../reducers/user.reducer";
-import AxiosModule from "../../services/itsse.axios";
+import ConnectModule from "../../services/itsse.axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   //
+  const navigate = useNavigate();
   const [id, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput("");
-  const axiosModule = AxiosModule();
   const dispatch = useDispatch();
 
   const signin = useCallback(() => {
@@ -18,18 +19,16 @@ const Login = () => {
       id,
       password,
     };
-    axiosModule.sendPost(
-      "http://localhost:8080/sign-api/sign-in",
-      loginData,
-      setToken
-    );
+    ConnectModule.sendPost("/sign-api/sign-in", loginData, setToken);
   }, [id, password]);
 
   const setToken = (response) => {
+    console.log("[ Login.js ] 로그인 함수 호출 : ", response);
     const responseData = response.data;
     const token = responseData.token;
     window.localStorage.setItem("token", token);
     dispatch(login());
+    navigate("/article/mylist");
   };
 
   const goToUserRegister = () => {

@@ -6,6 +6,7 @@ import About from "./pages/etc/About";
 import Profile from "./pages/user/Profile";
 import Articles from "./pages/Articles";
 import Article from "./pages/Article";
+import MyList from "./pages/article/MyList";
 import Layout from "./Layout";
 import Register from "./pages/user/Register";
 import Login from "./pages/user/Login";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/article/register" element={<ArticleRegister />} />
+        <Route path="/article/mylist" element={<MyList />} />
         <Route path="/articles" element={<Articles />}>
           <Route path=":id" element={<Article />} />
         </Route>

@@ -14,7 +14,13 @@ const Layout = () => {
   //
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const [navItems, setNavItems] = useState(["Login"]);
+  const [navItems, setNavItems] = useState([
+    "Home",
+    "About us",
+    "Contents",
+    "Profile",
+    "Login",
+  ]);
   // const navItems = ["Home", "About us", "Contents", "Profile", "Login"];
 
   useEffect(() => {

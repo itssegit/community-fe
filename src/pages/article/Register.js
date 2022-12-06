@@ -1,58 +1,96 @@
 import { Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
+import AutoStoriesTwoToneIcon from "@mui/icons-material/AutoStoriesTwoTone";
+import { makeStyles } from "@mui/styles";
 import { useState, useCallback } from "react";
-import Editor from "./EditorComponent";
-import axios from "axios";
-import AxiosModule from "../../services/itsse.axios";
+import { useNavigate } from "react-router-dom";
+import EditorComponent from "./EditorComponent";
+import ConnectModule from "../../services/itsse.axios";
+
+const useStyles = makeStyles({
+  buttonWrapper: {
+    textAlign: "right",
+  },
+  ml_4: {
+    marginLeft: "4px",
+  },
+  mb_12: {
+    marginBottom: "1.2rem",
+  },
+});
 
 const ArticleRegister = () => {
-  const [desc, setDesc] = useState("");
-  const am = AxiosModule();
-  function onEditorChange(value) {
-    setDesc(value);
-  }
+  //
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
-  const sendPost = (url, data, callback) => {
-    //
-    const token = window.localStorage.getItem("token");
-    console.log("in send post", token);
-    const config = {
-      "Content-Type": "application/json",
-      headers: {
-        //Authorization: `Bearer ` + token,
-        Authorization: token,
-      },
-    };
-    console.log("data", data);
-    axios
-      .post(url, data, config)
-      .then((response) => {
-        console.log(response);
-        if (callback) {
-          callback(response);
-        }
-      })
-      .catch((error) => {
-        //console.log(error);
-        if (error.response.status === 403) {
-          window.location.href = "/user/login";
-        }
-      })
-      .then((result) => {
-        console.log("after axios network, must execute");
-      });
+  const onEditorChange = (value) => {
+    setContent(value);
+  };
+
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
   };
 
   const saveArticle = useCallback(() => {
     //
-    sendPost("/api/article/register", desc);
-  }, [desc]);
+    const articleInfoToSave = {
+      title,
+      content,
+      author: "shelter0420@naver.com",
+    };
+
+    ConnectModule.sendPost("/api/article/register", articleInfoToSave);
+  }, [title, content]);
+
+  const moveToMyList = useCallback(() => {
+    //
+    navigate("/article/mylist");
+  }, []);
 
   return (
     <div>
-      <Editor value={desc} onChange={onEditorChange} />
-      <Button variant="contained" onClick={saveArticle}>
-        저장
-      </Button>
+      <h1>새로운 이야기를 작성해주세요.</h1>
+      <div className={classes.mb_12}>
+        <TextField
+          className="w-full"
+          style={{ width: "100%" }}
+          id="input-with-icon-textfield"
+          label="제목을 입력해주세요! (필수)"
+          onChange={onTitleChange}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <AutoStoriesTwoToneIcon />
+              </InputAdornment>
+            ),
+          }}
+          variant="standard"
+        />
+      </div>
+      <div>
+        <EditorComponent value={content} onChange={onEditorChange} />
+      </div>
+      <div className={classes.buttonWrapper}>
+        <Button
+          variant="contained"
+          onClick={saveArticle}
+          style={{ marginLeft: "4px" }}
+        >
+          저장
+        </Button>
+        <Button
+          variant="contained"
+          onClick={moveToMyList}
+          style={{ marginLeft: "4px" }}
+          color="success"
+        >
+          목록으로
+        </Button>
+      </div>
     </div>
   );
 };

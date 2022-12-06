@@ -4,20 +4,17 @@
 
 import axios from "axios";
 
-const AxiosModule = () => {
-  /**
-   * post method
-   * 1) url
-   * 2) send object
-   */
-  const sendPost = (url, data, callback) => {
+class ConnectModule {
+  //
+  sendPost = (url, data, callback) => {
     //
     const token = window.localStorage.getItem("token");
+    //
     console.log("in send post", token);
     const config = {
       "Content-Type": "application/json",
       headers: {
-        Authorization: `Bearer ` + token,
+        Authorization: token,
       },
     };
     console.log("data", data);
@@ -31,7 +28,7 @@ const AxiosModule = () => {
       })
       .catch((error) => {
         //console.log(error);
-        if (error.response.status === 403) {
+        if (error.response.status === 403 || error.response.status === 401) {
           window.location.href = "/user/login";
         }
       })
@@ -39,12 +36,8 @@ const AxiosModule = () => {
         console.log("after axios network, must execute");
       });
   };
+}
 
-  const module = {
-    sendPost,
-  };
+const instance = new ConnectModule();
 
-  return module;
-};
-
-export default AxiosModule;
+export default instance;
