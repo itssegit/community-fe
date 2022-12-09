@@ -9,18 +9,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import UserProfile from "./pages/user/UserProfile";
 
 const Layout = () => {
   //
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-  const [navItems, setNavItems] = useState([
-    "Home",
-    "About us",
-    "Contents",
-    "Profile",
-    "Login",
-  ]);
+  const [currentMenu, setCurrentMenu] = useState("");
+  const [navItems, setNavItems] = useState(["Home", "About us", "Contents"]);
   // const navItems = ["Home", "About us", "Contents", "Profile", "Login"];
 
   useEffect(() => {
@@ -38,6 +35,7 @@ const Layout = () => {
 
   const movePage = (item) => {
     const selectedMenu = item.target.value;
+    setCurrentMenu(selectedMenu);
     switch (selectedMenu) {
       case "Home":
         navigate("/");
@@ -97,7 +95,26 @@ const Layout = () => {
       </AppBar>
       <Container fixed>
         <Box sx={{ width: "100%", pt: "84px" }}>
-          <Outlet />
+          <Grid container spacing={2}>
+            {currentMenu === "Login" ? (
+              <Grid item xs={12}>
+                <div>
+                  <Outlet />
+                </div>
+              </Grid>
+            ) : (
+              <>
+                <Grid item xs={3}>
+                  <UserProfile />
+                </Grid>
+                <Grid item xs={9}>
+                  <div>
+                    <Outlet />
+                  </div>
+                </Grid>
+              </>
+            )}
+          </Grid>
         </Box>
       </Container>
     </Box>

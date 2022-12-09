@@ -27,7 +27,7 @@ const Login = () => {
     const responseData = response.data;
     const token = responseData.token;
     window.localStorage.setItem("token", token);
-    dispatch(login());
+    dispatch(login(responseData.user));
     navigate("/article/mylist");
   };
 
@@ -36,7 +36,7 @@ const Login = () => {
   };
   //
   return (
-    <div style={{ marginTop: "4rem" }}>
+    <div style={{ marginTop: "30px" }}>
       <Box
         component="form"
         style={{

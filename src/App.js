@@ -13,6 +13,9 @@ import Login from "./pages/user/Login";
 import AuthRoute from "./pages/auth/AuthRoute";
 import ArticleRegister from "./pages/article/Register";
 import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setUser } from "./reducers/user.reducer";
 
 /**
  * <Route path='/user/profiles/:username' element={<Profile />}/>
@@ -22,11 +25,24 @@ import { useEffect } from "react";
 function App() {
   //
   const userRole = "admin";
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log(user);
-  }, [user]);
+    const token = localStorage.getItem("token");
+    console.log("[App.js User 호출]", user);
+    axios
+      .post("/sign-api/refreshTokenAndUser", token, {
+        "Content-Type": "application/json",
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        console.log("App.js User 호출2", response);
+        dispatch(setUser(response.data));
+      });
+  }, []);
 
   return (
     <Routes>
